@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -85,6 +85,18 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     window.removeEventListener('keydown', closeOnEscape);
   }
 }
+
+function getDirectTextContent(menuItem) {
+  const menuLink = menuItem.querySelector(':scope > a');
+  if (menuLink) {
+    return menuLink.textContent.trim();
+  }
+  return Array.from(menuItem.childNodes)
+    .filter((n) => n.nodeType === Node.TEXT_NODE)
+    .map((n) => n.textContent)
+    .join(' ');
+}
+
 async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const crumbs = [];
 
@@ -198,6 +210,7 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
     navWrapper.append(await buildBreadcrumbs());
   }
