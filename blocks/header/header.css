@@ -306,6 +306,7 @@ header .breadcrumbs ol {
   margin-top: 0;
   margin-bottom: 0;
   gap: 1ch;
+  color:green;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -321,7 +322,7 @@ header .breadcrumbs ol li:not(:last-child)::after {
 
 /* stylelint-disable-next-line no-descending-specificity */
 header .breadcrumbs ol li a:any-link {
-  color: var(--text-color);
+  color: green;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
