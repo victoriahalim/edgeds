@@ -21,6 +21,9 @@ const loadScript = (url, callback, type) => {
         scrolling="no" allow="encrypted-media" title="Content from ${url.hostname}" loading="lazy">
       </iframe>
     </div>`;
+    // Create a new div element
+
+
   
   const embedYoutube = (url, autoplay) => {
     const usp = new URLSearchParams(url.search);
