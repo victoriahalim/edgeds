@@ -1,7 +1,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
-  
+  gap:20px;
 }
 
 .columns img {
@@ -27,7 +27,9 @@
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
-    flex-direction: unset;
+    flex-direction: row;
+    width:100%;
+    height:auto;
     gap: 32px;
   }
 

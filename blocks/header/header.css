@@ -221,6 +221,7 @@ header nav#nav .nav-sections ul > li > ul > li {
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
+  
 
   header nav#nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     top: unset;
@@ -247,7 +248,7 @@ header nav#nav .nav-sections ul > li > ul > li {
   }
 
   header nav#nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] > ul {
-    display: block;
+    display: none;
     position: absolute;
     left: -1em;
     width: 200px;
@@ -282,9 +283,13 @@ header nav#nav .nav-tools {
 header nav#nav .nav-tools .button {
   background: none;
   border: none;
-  padding: 10px;
+  padding-left:10px;
   margin: 0;
 }
+header nav#nav .nav-tools .svg{
+  padding-left: 10px;
+}
+
 
 
 /* breadcrumbs */
