@@ -1,8 +1,12 @@
 export default function decorate(block) {
-    [...block.children].forEach((row) =>{
-    const h2=document.createElement('h2');
-    block.appendChild(h2);
-    const link=document.createElement('a');
-    block.appendChild(link)
-
-});}
+    const headerDiv = block.querySelector(':scope>div>div');
+    const header= document.createElement("h2");
+    header.innerHTML = `$"{headerDiv.innerHTML}"`;
+    headerDiv.replacewith(header);
+    const linksDiv = block.querySelector(':scope>div>div>div>div>');
+    const links = document.createElement("a")
+    links.classList.add("linksstyling");
+    links.innerHTML="$linksDiv.innerHTML}"
+    linksDiv.replacewith(links);
+           
+}

@@ -1,6 +1,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  
 }
 
 .columns img {
@@ -9,6 +10,9 @@
 
 .columns > div > div {
   order: 1;
+  background-color: #efeef783;
+  padding-bottom: 10px;
+  
 }
 
 .columns > div > .columns-img-col {
@@ -17,6 +21,7 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  
 }
 
 @media (width >= 900px) {

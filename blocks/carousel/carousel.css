@@ -56,7 +56,7 @@
     z-index: 1;
     padding: 1rem;
     margin: 1.5rem 3rem;
-    color: red;
+    color: white;
     background-color: rgba(0 0 0 / 50%);
     position: relative;
     width: var(--slide-content-width, auto);

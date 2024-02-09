@@ -1,7 +1,9 @@
 /* General Embed Styles */
 .embed {
-  width: 70%;
-  max-width: 800px;
+  width: 60%;
+  padding-left:10%;
+  padding-bottom:10%;
+  padding-top:3%;
   margin: 32px auto;
   float: right; /* Add this line to float the embed to the right */
 }
@@ -67,5 +69,11 @@
 }
 /* Add a new class for the div above the video */
 
-
-/* General Embed Styles */
+@media only screen and (max-width: 1300px) {
+  .embed {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:block;
+  }
+}
