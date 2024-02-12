@@ -183,6 +183,11 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
+        if(window.matchMedia("(max-width: 899px)").matches){
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
       });
     });
   }
