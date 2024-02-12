@@ -266,10 +266,15 @@ header nav#nav .nav-tools {
   
   
 }
-header nav#nav .nav-tools svg{
+header nav#nav .nav-tools p{
+  align-items:center;
+}
+
+header nav#nav .nav-tools p a{
   
   padding-left:10px;
   padding-right:10px;
+  
   height:8px;
   width:8px;
   
