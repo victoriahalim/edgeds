@@ -55,7 +55,7 @@
   .carousel .carousel-slide .carousel-slide-content {
     z-index: 1;
     padding: 1rem;
-    margin: 1.5rem 3rem;
+    /*margin: 1.5rem 3rem;*/
     color: white;
     background-color: rgba(0 0 0 / 50%);
     position: relative;
@@ -74,6 +74,7 @@
     padding: 0;
     border-radius: 1rem;
     background-color: rgba(0 0 0 / 25%);
+    z-index: 2;
   }
   
   .carousel .carousel-slide-indicator button:disabled,
@@ -94,6 +95,7 @@
     position: absolute;
     width: 1px;
     white-space: nowrap;
+    z-index: 2;
   }
   
   .carousel .carousel-navigation-buttons {
@@ -105,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1;
+    z-index: 2;
   }
   
   /* stylelint-disable-next-line no-descending-specificity */
@@ -117,11 +119,13 @@
     height: 2rem;
     position: relative;
     background-color: rgba(0 0 0 / 25%);
+    z-index: 2;
   }
   
   .carousel .carousel-navigation-buttons button:hover,
   .carousel .carousel-navigation-buttons button:focus-visible {
     background-color: rgba(0 0 0 / 80%);
+    z-index: 2;
   }
   
   .carousel .carousel-navigation-buttons button::after {
@@ -136,36 +140,59 @@
     top: 50%;
     left: calc(50% + 3px);
     transform: translate(-50%, -50%) rotate(-135deg);
+    z-index: 2;
   }
   
   .carousel .carousel-navigation-buttons button.slide-next::after {
     transform: translate(-50%, -50%)  rotate(45deg);
     left: calc(50% - 3px);
+    z-index: 2;
   }
   
   @media (min-width: 600px) {
     .carousel .carousel-navigation-buttons {
       left: 1rem;
       right: 1rem;
+      z-index: 2;
     }
   
     .carousel .carousel-navigation-buttons button {
       width: 3rem;
       height: 3rem;
+      z-index: 2;
     }
   
     .carousel .carousel-navigation-buttons button::after {
       width: 1rem;
       height: 1rem;
+      z-index: 2;
     }
   
     .carousel .carousel-slide .carousel-slide-content {
-      --slide-content-width: 50%;
-  
+      /*--slide-content-width: 100%;
       margin: 2.5rem 5rem;
+      height: 550px;
+      flex; 0 0 auto;
+      padding-right: calc(var(--bs-gutter-x)* .5);
+      padding-left: calc(var(--bs-gutter-x)* .5);
+      margin-top: var(--bs-gutter-y);
+      box-sizing: border-box;
+      position: relative;*/
+      /* display: inline-block; Ensures container only occupies necessary space*/
+      position: absolute;
+      padding: 10% 5%;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 40%; /* Make the overlay cover half of the container */
+      background-color: rgba(0, 0, 0); /* Black overlay with 50% opacity */
+      z-index: 1; /* Ensure overlay appears above the image */
     }
-  
+
     .carousel .carousel-slide .carousel-slide-content[data-align="justify"] {
       --slide-content-width: auto;
+
     }
+
+
   }
