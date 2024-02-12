@@ -70,13 +70,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
         drop.addEventListener('focus', focusNavSection);
       }
     });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('role');
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
-  }
+  } 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
     // collapse menu on escape press

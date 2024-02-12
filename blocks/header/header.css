@@ -48,19 +48,19 @@ header nav#nav[aria-expanded="true"] {
   }
 }
 
-header nav#nav p {
-  margin: 0;
-  line-height: 1;
-}
+
 
 
 
 /* hamburger */
+
+
 header nav#nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
   display: flex;
   align-items: center;
+ 
 }
 
 header nav#nav .nav-hamburger button {
@@ -83,6 +83,7 @@ header nav#nav .nav-hamburger-icon::after {
   display: block;
   position: relative;
   width: 20px;
+  
 }
 
 header nav#nav .nav-hamburger-icon::before,
@@ -110,6 +111,7 @@ header nav#nav[aria-expanded="false"] .nav-hamburger-icon::after {
 
 header nav#nav[aria-expanded="true"] .nav-hamburger-icon {
   height: 22px;
+  border: 2px solid green;
 }
 
 header nav#nav[aria-expanded="true"] .nav-hamburger-icon::before,
@@ -121,6 +123,7 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
   width: 24px;
   height: 2px;
   border-radius: 2px;
+  
 }
 
 header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
@@ -259,17 +262,20 @@ header nav#nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav#nav .nav-tools {
   grid-area: tools;
-  display: flex;
-
+  display:flex;
+  
   
 }
 header nav#nav .nav-tools svg{
-  display:flex;
-  flex-direction: row;
-  height:10px;
-  width:10px;
-  padding-left: 30px;
-  padding-right: 30px;
+  
+  padding-left:10px;
+  padding-right:10px;
+  height:8px;
+  width:8px;
+  
+}
+header nav#nav .nav-tools svg:last-child {
+  padding-right: 0; 
 }
 header nav#nav .nav-tools svg:hover{
   fill:green;
