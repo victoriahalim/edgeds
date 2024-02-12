@@ -4,9 +4,9 @@ export default function decorate(block) {
     header.innerHTML = `$"{headerDiv.innerHTML}"`;
     headerDiv.replacewith(header);
     const linksDiv = block.querySelector(':scope>div>div>div>div>');
-    const links = document.createElement("a")
+    const links = document.createElement("p")
     links.classList.add("linksstyling");
-    links.innerHTML="$linksDiv.innerHTML}"
+    
     linksDiv.replacewith(links);
            
 }
