@@ -29,8 +29,9 @@
     align-items: center;
     flex-direction: row;
     width:100%;
-    height:auto;
+    height:60px;
     gap: 32px;
+    padding-top:100px;
   }
 
   .columns > div > div {

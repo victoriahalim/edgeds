@@ -26,8 +26,12 @@
 
 .cards .cards-card-body > *:first-child {
   margin-top: 0;
-  background-color: hsl(0, 7%, 76%);
+  background-color: hwb(0 81% 15%);
+  height:40px;
+  align-items: auto;
+
 }
+
 
 .cards > ul > li img {
   width: 100%;
