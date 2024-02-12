@@ -13,7 +13,7 @@
 :root {
   /* colors */
   --link-color: #035fe6;
-  --link-hover-color: #208834;
+  --link-hover-color: #136ff6;
   --background-color: white;
   --light-color: #eee;
   --dark-color: #ccc;
@@ -41,6 +41,7 @@
 
   /* nav height */
   --nav-height: 64px;
+  
 }
 
 @font-face {
@@ -212,7 +213,7 @@ a:any-link {
 }
 
 a:hover {
-  text-decoration: underline;
+  
   color: var(--link-hover-color);
 }
 
@@ -308,5 +309,5 @@ main .section {
 /* section metadata */
 main .section.light,
 main .section.highlight {
-  background-color: red;
+  background-color: var(--light-color);
 }

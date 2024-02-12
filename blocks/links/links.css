@@ -1,0 +1,23 @@
+.links{
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+    height:auto;
+    padding-bottom:20px;
+    
+}
+.links h2{
+  border-bottom: 2px solid #aabbaa;
+}
+
+.links p{
+border-bottom: 2px solid #aabbaa ;
+}
+
+@media only screen and (max-width: 1300px) {
+    .links {
+      width: 100%;
+      
+      padding-bottom: 20px;
+    }
+  }
