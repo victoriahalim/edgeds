@@ -132,7 +132,7 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media(width<=900px)
+@media(width<=900px ) 
 {
   
   header nav#nav .nav-sections  .nav-drop{
@@ -171,11 +171,14 @@ header nav .nav-sections ul {
   
   
 }
+
+
 header nav .nav-sections .default-content-wrapper > ul > li {
   flex: 0 1 auto;
   position: relative;
   font-weight: 500;
   margin-bottom: 10px;
+  
   
 }
 
@@ -204,10 +207,16 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 8px solid var(--light-color);
+  
 }
 
 header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
   padding: 8px 0;
+  
+}
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover{
+  background-color: green;
+  color:white;
 }
 }
 @media (width >= 900px) {
