@@ -167,32 +167,46 @@
       height: 1rem;
       z-index: 2;
     }
-  
+
     .carousel .carousel-slide .carousel-slide-content {
-      /*--slide-content-width: 100%;
-      margin: 2.5rem 5rem;
-      height: 550px;
-      flex; 0 0 auto;
-      padding-right: calc(var(--bs-gutter-x)* .5);
-      padding-left: calc(var(--bs-gutter-x)* .5);
-      margin-top: var(--bs-gutter-y);
-      box-sizing: border-box;
-      position: relative;*/
-      /* display: inline-block; Ensures container only occupies necessary space*/
       position: absolute;
       padding: 10% 5%;
       top: 0;
       bottom: 0;
       right: 0;
       width: 40%; /* Make the overlay cover half of the container */
-      background-color: rgba(0, 0, 0); /* Black overlay with 50% opacity */
+      background-color: rgba(0, 0, 0);
       z-index: 1; /* Ensure overlay appears above the image */
     }
+
+    .carousel .carousel-slide .carousel-slide-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%; /* Adjust the width of the image as needed */
+      height: 100%; /* Maintain aspect ratio */
+      object-fit: cover; /* Maintain aspect ratio while covering the container */
+    }
+
 
     .carousel .carousel-slide .carousel-slide-content[data-align="justify"] {
       --slide-content-width: auto;
 
     }
 
+    .carousel-slide-content {
+      position: relative;
+      padding: 10% 5%;
+    }
+
+    .carousel-slide-content.empty {
+      display: none;
+    }
+
+    .carousel .carousel-slide .carousel-slide-image.empty {
+      width: 100%; /* Set width to 100% for a perfectly fitted image */
+      height: auto; /* Reset height to auto to maintain aspect ratio */
+      object-fit: contain; /* Adjust object-fit property as needed */
+    }
 
   }
