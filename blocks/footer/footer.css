@@ -1,7 +1,8 @@
 footer {
   padding: 2rem;
-  background-color: black;
+  background-color:black;
   font-size: var(--body-font-size-s);
+  color:white;
 }
 
 footer .footer {
@@ -12,3 +13,15 @@ footer .footer {
 footer .footer p {
   margin: 0;
 }
+ footer .footer-wrapper{
+  display:flex;
+  flex-direction:row;
+  
+  
+ }
+ footer .default-content-wrapper{
+  display:inline-block;
+  
+  flex-direction:row;
+  justify-content:space-between;
+ }
