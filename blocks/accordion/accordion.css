@@ -17,13 +17,11 @@
     transition: background-color 0.2s;
   }
   
-  .accordion details[open] summary {
-    background-color: var(--light-color);
-  }
   
-  .accordion details summary:focus,
+  
+  
   .accordion details summary:hover {
-    background-color: var(--dark-color);
+    color:green;
   }
   
   .accordion details summary::-webkit-details-marker {

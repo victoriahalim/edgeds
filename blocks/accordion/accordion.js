@@ -23,7 +23,11 @@ function hasWrapper(el) {
       body.className = 'accordion-item-body';
       if (!hasWrapper(body)) {
         body.innerHTML = `<p>${body.innerHTML}</p>`;
+        
       }
+    
+
+    
       // decorate accordion item
       const details = document.createElement('details');
       details.className = 'accordion-item';
