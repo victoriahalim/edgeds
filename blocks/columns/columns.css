@@ -4,28 +4,35 @@
   gap:20px;
 }
 
-.columns img {
-  width: 100%;
-}
 
 .columns > div > div {
   order: 1;
-  background-color: #efeef783;
-  padding-bottom: 10px;
+  background-color: rgb(242, 242, 248);
   padding: 0px 32px 32px;
   display: flex
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 1;
 }
 
 .columns > div > .columns-img-col {
-  order: 0;
+  order: -1;
 }
 
 .columns > div > .columns-img-col img {
   display: block;
-  
+
 }
+
+img[data-icon-name="icon-small-right"] {
+  transform: scale(2); /* Set the desired height */
+}
+
+.columns-wrapper .columns > div > div::before {
+  content: url('../icons/icon-small-right.svg'); /* Unicode for a right arrow */
+  margin-right: 10px; /* Adjust spacing between the icon and text */
+  height: 20px; /* Adjust icon size as needed */
+}
+
 
 @media (width >= 900px) {
   .columns > div {
@@ -41,4 +48,5 @@
     flex: 1;
     order: unset;
   }
+
 }
