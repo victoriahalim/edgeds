@@ -187,7 +187,9 @@
       height: 100%; /* Maintain aspect ratio */
       object-fit: cover; /* Maintain aspect ratio while covering the container */
     }
-
+    .carousel .carousel-slide .carousel-slide-image:last-child{
+      width:100%;
+    }
 
     .carousel .carousel-slide .carousel-slide-content[data-align="justify"] {
       --slide-content-width: auto;
