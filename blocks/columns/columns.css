@@ -42,9 +42,9 @@ img[data-icon-name="icon-small-right"] {
     align-items: center;
     flex-direction: row;
     width:100%;
-    height:60px;
+    height:50px;
     gap: 32px;
-    padding-top:150px;
+    padding-top:200px;
     padding-bottom:100px;
   }
 
