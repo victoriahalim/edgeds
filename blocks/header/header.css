@@ -229,7 +229,7 @@ header nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover{
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
+  flex-basis: 120px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
@@ -238,7 +238,7 @@ header .nav-brand {
 }
 
 header nav#nav .nav-brand img {
-  width: 128px;
+  width: 100px;
   height: auto;
 }
 

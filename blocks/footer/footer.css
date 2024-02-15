@@ -20,8 +20,12 @@ footer .footer p {
    display:flex;
  }
 
+ footer .section:first-child{
+ width:33.3333%;
+ }
+
  footer .section{
-  width:20%;
+  width:16.6667%;
   box-sizing: border-box;
   float:left;
   padding-bottom: 100px;
@@ -47,12 +51,11 @@ footer .footer p {
 @media screen and (max-width:900px){
   footer .section{
     width:100%;
-    display:flex;
-    
-    
-    float: unset;
-  }
+   }
   footer .section:last-child{
     border-top:  1px solid white;
+  }
+  footer .section:first-child{
+    width:100%;
   }
 }
