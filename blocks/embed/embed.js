@@ -1,9 +1,3 @@
-/*
- * Embed Block
- * Show videos and social posts directly on your page
- * https://www.hlx.live/developer/block-collection/embed
- */
-
 const loadScript = (url, callback, type) => {
     const head = document.querySelector('head');
     const script = document.createElement('script');
@@ -21,8 +15,6 @@ const loadScript = (url, callback, type) => {
         scrolling="no" allow="encrypted-media" title="Content from ${url.hostname}" loading="lazy">
       </iframe>
     </div>`;
-    // Create a new div element
-
   const embedYoutube = (url, autoplay) => {
     const usp = new URLSearchParams(url.search);
     const suffix = autoplay ? '&muted=1&autoplay=1' : '';
@@ -60,7 +52,6 @@ const loadScript = (url, callback, type) => {
     if (block.classList.contains('embed-is-loaded')) {
       return;
     }
-  
     const EMBEDS_CONFIG = [
       {
         match: ['youtube', 'youtu.be'],
@@ -75,7 +66,6 @@ const loadScript = (url, callback, type) => {
         embed: embedTwitter,
       },
     ];
-  
     const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));
     const url = new URL(link);
     if (config) {
@@ -92,7 +82,6 @@ const loadScript = (url, callback, type) => {
     const placeholder = block.querySelector('picture');
     const link = block.querySelector('a').href;
     block.textContent = '';
-  
     if (placeholder) {
       const wrapper = document.createElement('div');
       wrapper.className = 'embed-placeholder';

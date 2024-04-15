@@ -15,7 +15,6 @@ function updateActiveSlide(slide) {
       }
     });
   });
-  // Get all carousel slide content elements
   const carouselSlideContents = document.querySelectorAll('.carousel-slide-content');
     carouselSlideContents.forEach(content => {
       const hasContent = content.textContent.trim().length > 0 || content.children.length > 0;
