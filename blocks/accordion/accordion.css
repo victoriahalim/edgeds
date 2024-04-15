@@ -16,10 +16,7 @@
     overflow: auto;
     transition: background-color 0.2s;
   }
-  
-  
-  
-  
+
   .accordion details summary:hover {
     color:green;
   }

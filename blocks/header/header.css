@@ -49,12 +49,7 @@ header nav#nav[aria-expanded="true"] {
 }
 
 
-
-
-
 /* hamburger */
-
-
 header nav#nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -123,9 +118,7 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
   width: 24px;
   height: 2px;
   border-radius: 2px;
-  
-}
-
+  }
 header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
   top: unset;
   bottom: 3px;
@@ -282,21 +275,16 @@ header nav#nav .nav-sections ul > li > ul > li {
     white-space: nowrap;
   }
 
-  
-
   header nav#nav[aria-expanded="true"] .nav-sections {
     align-self: unset;
   }
 
-  
   header nav#nav .nav-sections ul {
     display: flex;
     gap: 3em;
     margin: 0;
     font-size: var(--body-font-size-xs);
   }
-
-  
 
   header nav#nav .nav-sections .default-content-wrapper > ul > li:hover {
     flex: 0 1 auto;
@@ -311,15 +299,11 @@ header nav#nav .nav-sections ul > li > ul > li {
    cursor:pointer;
    border-bottom: 3px solid green;
   }
-  
-  
+
   header nav#nav .nav-sections .default-content-wrapper >ul li ul{
     position:absolute;
     opacity: 0;
-    
-    
   }
-  
 
   header nav#nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
     visibility: visible;
@@ -332,14 +316,12 @@ header nav#nav .nav-sections ul > li > ul > li {
     padding: 1em;
     background-color: white;
     white-space: initial;
-    
   }
   
   header nav#nav .nav-sections .default-content-wrapper > ul > li > ul > li:hover{
     background-color: green;
     color:white;
   }
-  
 
   header nav#nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 0;
@@ -350,9 +332,8 @@ header nav#nav .nav-sections ul > li > ul > li {
 header nav#nav .nav-tools {
   grid-area: tools;
   display:flex;
-  
-  
 }
+
 header nav#nav .nav-tools p{
   align-items:center;
 }
@@ -361,18 +342,13 @@ header nav#nav .nav-tools p a{
   
   padding-left:10px;
   padding-right:10px;
-  
   height:15px;
   width:15px;
-  
 }
 
 header nav#nav .nav-tools svg:hover{
   fill:green;
 }
-
-
-
 
 /* breadcrumbs */
 header .breadcrumbs {

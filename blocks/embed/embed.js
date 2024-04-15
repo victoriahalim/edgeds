@@ -23,8 +23,6 @@ const loadScript = (url, callback, type) => {
     </div>`;
     // Create a new div element
 
-
-  
   const embedYoutube = (url, autoplay) => {
     const usp = new URLSearchParams(url.search);
     const suffix = autoplay ? '&muted=1&autoplay=1' : '';

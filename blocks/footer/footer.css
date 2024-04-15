@@ -3,8 +3,6 @@ footer {
   background-color:black;
   font-size: var(--body-font-size-s);
   color:white;
-  
-  
 }
 
 footer .footer {
@@ -44,10 +42,8 @@ footer .footer p {
   padding-right:10px;
   padding-top:20px;
   float:right;
-  
- 
- 
  }
+
 @media screen and (max-width:900px){
   footer .section{
     width:100%;
