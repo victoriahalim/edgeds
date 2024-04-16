@@ -38,7 +38,6 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
-// DIFF: Dont have params that the original defines, and other missing stuff too
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
@@ -63,7 +62,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-// DIFF: og didn't have this.
 function getDirectTextContent(menuItem) {
   const menuLink = menuItem.querySelector(':scope > a');
   if (menuLink) {
@@ -75,7 +73,54 @@ function getDirectTextContent(menuItem) {
     .join(' ');
 }
 
-// a few differences here too
+async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
+  const crumbs = [];
+  const homeUrl = document.querySelector('.nav-brand a').href;
+  let menuItem = Array.from(nav.querySelectorAll('a')).find((a) => a.href === currentUrl);
+  if (menuItem) {
+    do {
+      const link = menuItem.querySelector(':scope > a');
+      crumbs.unshift({ title: getDirectTextContent(menuItem), url: link ? link.href : null });
+      menuItem = menuItem.closest('ul')?.closest('li');
+    } while (menuItem);
+  } else if (currentUrl !== homeUrl) {
+    crumbs.unshift({ title: getMetadata('og:title'), url: currentUrl });
+  }
+  const placeholders = await fetchPlaceholders();
+  const homePlaceholder = placeholders.breadcrumbsHomeLabel || 'Home';
+  crumbs.unshift({ title: homePlaceholder, url: homeUrl });
+  if (crumbs.length > 1) {
+    crumbs[crumbs.length - 1].url = null;
+  }
+  crumbs[crumbs.length - 1]['aria-current'] = 'page';
+  return crumbs;
+}
+
+async function buildBreadcrumbs() {
+  const breadcrumbs = document.createElement('nav');
+  breadcrumbs.className = 'breadcrumbs';
+
+  const crumbs = await buildBreadcrumbsFromNavTree(document.querySelector('.nav-sections'), document.location.href);
+
+  const ol = document.createElement('ol');
+  ol.append(...crumbs.map((item) => {
+    const li = document.createElement('li');
+    if (item['aria-current']) li.setAttribute('aria-current', item['aria-current']);
+    if (item.url) {
+      const a = document.createElement('a');
+      a.href = item.url;
+      a.textContent = item.title;
+      li.append(a);
+    } else {
+      li.textContent = item.title;
+    }
+    return li;
+  }));
+
+  breadcrumbs.append(ol);
+  return breadcrumbs;
+}
+
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
@@ -126,4 +171,7 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+  if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
+    navWrapper.append(await buildBreadcrumbs());
+  }
 }

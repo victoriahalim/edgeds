@@ -28,7 +28,11 @@ img[data-icon-name="icon-small-right"] {
   transform: scale(2); /* Set the desired height */
 }
 
-/* HERE */
+.columns-wrapper .columns > div > div::before {
+  content: url('../icons/icon-small-right.svg'); /* Unicode for a right arrow */
+  margin-right: 10px; /* Adjust spacing between the icon and text */
+  height: 20px; /* Adjust icon size as needed */
+}
 
 
 @media (width >= 900px) {
