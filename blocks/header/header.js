@@ -1,1 +1,177 @@
-import{fetchPlaceholders,getMetadata}from"../../scripts/aem.js";import{loadFragment}from"../fragment/fragment.js";const isDesktop=window.matchMedia("(min-width: 900px)");function closeOnEscape(e){if("Escape"===e.code){const e=document.getElementById("nav"),t=e.querySelector(".nav-sections"),n=t.querySelector('[aria-expanded="true"]');n&&isDesktop.matches?(toggleAllNavSections(t),n.focus()):isDesktop.matches||(toggleMenu(e,t),e.querySelector("button").focus())}}function openOnKeydown(e){const t=document.activeElement;if("nav-drop"===t.className&&("Enter"===e.code||"Space"===e.code)){const e="true"===t.getAttribute("aria-expanded");toggleAllNavSections(t.closest(".nav-sections")),t.setAttribute("aria-expanded",e?"false":"true")}}function focusNavSection(){document.activeElement.addEventListener("keydown",openOnKeydown)}function toggleAllNavSections(e,t=!1){e.querySelectorAll(".nav-sections .default-content-wrapper > ul > li").forEach((e=>{e.setAttribute("aria-expanded",t)}))}function toggleMenu(e,t,n=null){const a=null!==n?!n:"true"===e.getAttribute("aria-expanded"),r=e.querySelector(".nav-hamburger button");document.body.style.overflowY=a||isDesktop.matches?"":"hidden",e.setAttribute("aria-expanded",a?"false":"true"),toggleAllNavSections(t,a||isDesktop.matches?"false":"true"),r.setAttribute("aria-label",a?"Open navigation":"Close navigation");const o=t.querySelectorAll(".nav-drop");isDesktop.matches&&o.forEach((e=>{e.hasAttribute("tabindex")||(e.setAttribute("role","button"),e.setAttribute("tabindex",0),e.addEventListener("focus",focusNavSection))})),!a||isDesktop.matches?window.addEventListener("keydown",closeOnEscape):window.removeEventListener("keydown",closeOnEscape)}function getDirectTextContent(e){const t=e.querySelector(":scope > a");return t?t.textContent.trim():Array.from(e.childNodes).filter((e=>e.nodeType===Node.TEXT_NODE)).map((e=>e.textContent)).join(" ")}async function buildBreadcrumbsFromNavTree(e,t){const n=[],a=document.querySelector(".nav-brand a").href;let r=Array.from(e.querySelectorAll("a")).find((e=>e.href===t));if(r)do{const e=r.querySelector(":scope > a");n.unshift({title:getDirectTextContent(r),url:e?e.href:null}),r=r.closest("ul")?.closest("li")}while(r);else t!==a&&n.unshift({title:getMetadata("og:title"),url:t});const o=(await fetchPlaceholders()).breadcrumbsHomeLabel||"Home";return n.unshift({title:o,url:a}),n.length>1&&(n[n.length-1].url=null),n[n.length-1]["aria-current"]="page",n}async function buildBreadcrumbs(){const e=document.createElement("nav");e.className="breadcrumbs";const t=await buildBreadcrumbsFromNavTree(document.querySelector(".nav-sections"),document.location.href),n=document.createElement("ol");return n.append(...t.map((e=>{const t=document.createElement("li");if(e["aria-current"]&&t.setAttribute("aria-current",e["aria-current"]),e.url){const n=document.createElement("a");n.href=e.url,n.textContent=e.title,t.append(n)}else t.textContent=e.title;return t}))),e.append(n),e}export default async function decorate(e){const t=getMetadata("nav"),n=t?new URL(t).pathname:"/nav",a=await loadFragment(n),r=document.createElement("nav");for(r.id="nav";a.firstElementChild;)r.append(a.firstElementChild);["brand","sections","tools"].forEach(((e,t)=>{const n=r.children[t];n&&n.classList.add(`nav-${e}`)}));const o=r.querySelector(".nav-brand").querySelector(".button");o&&(o.className="",o.closest(".button-container").className="");const s=r.querySelector(".nav-sections");s&&s.querySelectorAll(":scope .default-content-wrapper > ul > li").forEach((e=>{e.querySelector("ul")&&e.classList.add("nav-drop"),e.addEventListener("click",(()=>{if(isDesktop.matches){const t="true"===e.getAttribute("aria-expanded");toggleAllNavSections(s),e.setAttribute("aria-expanded",t?"false":"true")}if(window.matchMedia("(max-width: 899px)").matches){const t="true"===e.getAttribute("aria-expanded");toggleAllNavSections(s),e.setAttribute("aria-expanded",t?"false":"true")}}))}));const c=document.createElement("div");c.classList.add("nav-hamburger"),c.innerHTML='<button type="button" aria-controls="nav" aria-label="Open navigation">\n      <span class="nav-hamburger-icon"></span>\n    </button>',c.addEventListener("click",(()=>toggleMenu(r,s))),r.prepend(c),r.setAttribute("aria-expanded","false"),toggleMenu(r,s,isDesktop.matches),isDesktop.addEventListener("change",(()=>toggleMenu(r,s,isDesktop.matches)));const i=document.createElement("div");i.className="nav-wrapper",i.append(r),e.append(i),"true"===getMetadata("breadcrumbs").toLowerCase()&&i.append(await buildBreadcrumbs())}
+import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
+import { loadFragment } from '../fragment/fragment.js';
+
+const isDesktop = window.matchMedia('(min-width: 900px)');
+
+function closeOnEscape(e) {
+  if (e.code === 'Escape') {
+    const nav = document.getElementById('nav');
+    const navSections = nav.querySelector('.nav-sections');
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+    if (navSectionExpanded && isDesktop.matches) {
+      toggleAllNavSections(navSections);
+      navSectionExpanded.focus();
+    } else if (!isDesktop.matches) {
+      toggleMenu(nav, navSections);
+      nav.querySelector('button').focus();
+    }
+  }
+}
+
+function openOnKeydown(e) {
+  const focused = document.activeElement;
+  const isNavDrop = focused.className === 'nav-drop';
+  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
+    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(focused.closest('.nav-sections'));
+    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
+  }
+}
+
+function focusNavSection() {
+  document.activeElement.addEventListener('keydown', openOnKeydown);
+}
+
+function toggleAllNavSections(sections, expanded = false) {
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+  });
+}
+
+function toggleMenu(nav, navSections, forceExpanded = null) {
+  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
+  const button = nav.querySelector('.nav-hamburger button');
+  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
+  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  const navDrops = navSections.querySelectorAll('.nav-drop');
+  if (isDesktop.matches) {
+    navDrops.forEach((drop) => {
+      if (!drop.hasAttribute('tabindex')) {
+        drop.setAttribute('role', 'button');
+        drop.setAttribute('tabindex', 0);
+        drop.addEventListener('focus', focusNavSection);
+      }
+    });
+  }
+  if (!expanded || isDesktop.matches) {
+    window.addEventListener('keydown', closeOnEscape);
+  } else {
+    window.removeEventListener('keydown', closeOnEscape);
+  }
+}
+
+function getDirectTextContent(menuItem) {
+  const menuLink = menuItem.querySelector(':scope > a');
+  if (menuLink) {
+    return menuLink.textContent.trim();
+  }
+  return Array.from(menuItem.childNodes)
+    .filter((n) => n.nodeType === Node.TEXT_NODE)
+    .map((n) => n.textContent)
+    .join(' ');
+}
+
+async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
+  const crumbs = [];
+  const homeUrl = document.querySelector('.nav-brand a').href;
+  let menuItem = Array.from(nav.querySelectorAll('a')).find((a) => a.href === currentUrl);
+  if (menuItem) {
+    do {
+      const link = menuItem.querySelector(':scope > a');
+      crumbs.unshift({ title: getDirectTextContent(menuItem), url: link ? link.href : null });
+      menuItem = menuItem.closest('ul')?.closest('li');
+    } while (menuItem);
+  } else if (currentUrl !== homeUrl) {
+    crumbs.unshift({ title: getMetadata('og:title'), url: currentUrl });
+  }
+  const placeholders = await fetchPlaceholders();
+  const homePlaceholder = placeholders.breadcrumbsHomeLabel || 'Home';
+  crumbs.unshift({ title: homePlaceholder, url: homeUrl });
+  if (crumbs.length > 1) {
+    crumbs[crumbs.length - 1].url = null;
+  }
+  crumbs[crumbs.length - 1]['aria-current'] = 'page';
+  return crumbs;
+}
+
+async function buildBreadcrumbs() {
+  const breadcrumbs = document.createElement('nav');
+  breadcrumbs.className = 'breadcrumbs';
+
+  const crumbs = await buildBreadcrumbsFromNavTree(document.querySelector('.nav-sections'), document.location.href);
+
+  const ol = document.createElement('ol');
+  ol.append(...crumbs.map((item) => {
+    const li = document.createElement('li');
+    if (item['aria-current']) li.setAttribute('aria-current', item['aria-current']);
+    if (item.url) {
+      const a = document.createElement('a');
+      a.href = item.url;
+      a.textContent = item.title;
+      li.append(a);
+    } else {
+      li.textContent = item.title;
+    }
+    return li;
+  }));
+
+  breadcrumbs.append(ol);
+  return breadcrumbs;
+}
+
+export default async function decorate(block) {
+  const navMeta = getMetadata('nav');
+  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  const fragment = await loadFragment(navPath);
+  const nav = document.createElement('nav');
+  nav.id = 'nav';
+  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  const classes = ['brand', 'sections', 'tools'];
+  classes.forEach((c, i) => {
+    const section = nav.children[i];
+    if (section) section.classList.add(`nav-${c}`);
+  });
+  const navBrand = nav.querySelector('.nav-brand');
+  const brandLink = navBrand.querySelector('.button');
+  if (brandLink) {
+    brandLink.className = '';
+    brandLink.closest('.button-container').className = '';
+  }
+  const navSections = nav.querySelector('.nav-sections');
+  if (navSections) {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      navSection.addEventListener('click', () => {
+        if (isDesktop.matches) {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
+        if(window.matchMedia("(max-width: 899px)").matches){
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        }
+      });
+    });
+  }
+  const hamburger = document.createElement('div');
+  hamburger.classList.add('nav-hamburger');
+  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+      <span class="nav-hamburger-icon"></span>
+    </button>`;
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  nav.prepend(hamburger);
+  nav.setAttribute('aria-expanded', 'false');
+  toggleMenu(nav, navSections, isDesktop.matches);
+  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  const navWrapper = document.createElement('div');
+  navWrapper.className = 'nav-wrapper';
+  navWrapper.append(nav);
+  block.append(navWrapper);
+  if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
+    navWrapper.append(await buildBreadcrumbs());
+  }
+}
