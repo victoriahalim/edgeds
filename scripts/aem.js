@@ -699,13 +699,9 @@ function decorateBlocks(main) {
  * @returns {Promise}
  */
 async function loadHeader(header) {
-    console.log("BUILDING HEADER")
   const headerBlock = buildBlock('header', '');
-  console.log("APPENDING HEADER")
   header.append(headerBlock);
-  console.log("DECORATING HEADER")
   decorateBlock(headerBlock);
-  console.log("DONE")
   return loadBlock(headerBlock);
 }
 

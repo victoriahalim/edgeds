@@ -79,10 +79,13 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     await loadHeader(doc.querySelector('header'));
+    console.log("DONE AWAITING")
     decorateMain(main); // this does the STYLING for index doc
+    console.log("DECORATE MAIN")
     document.body.classList.add('appear');
+    console.log("DONE APPEAR")
     await waitForLCP(LCP_BLOCKS);
-    console.log("DONE WITH EAGER")
+    console.log("DONE LCP")
   }
 
   try {
@@ -130,7 +133,9 @@ function loadDelayed() {
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
+  console.log("DONE LOAD LAZY")
   loadDelayed();
+  console.log("DONE LOAD.")
 }
 
 loadPage();
