@@ -78,6 +78,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    console.log("START AWAITING")
     await loadHeader(doc.querySelector('header'));
     console.log("DONE AWAITING")
     decorateMain(main); // this does the STYLING for index doc
@@ -131,6 +132,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  console.log("START LOAD")
   await loadEager(document);
   await loadLazy(document);
   console.log("DONE LOAD LAZY")
