@@ -78,10 +78,11 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    loadHeader(doc.querySelector('header'));
-    decorateMain(main);
+    await loadHeader(doc.querySelector('header'));
+    decorateMain(main); // this does the STYLING for index doc
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
+    console.log("DONE WITH EAGER")
   }
 
   try {
@@ -100,13 +101,13 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
-  await loadBlocks(main);
+  await loadBlocks(main); // v: loads blocks in index doc
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadFooter(doc.querySelector('footer'));
+  // loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
