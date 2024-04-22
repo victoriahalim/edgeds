@@ -74,22 +74,16 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  console.log("START LOAD EAGER")
   document.documentElement.lang = 'en';
-  console.log("DECORATE")
   decorateTemplateAndTheme();
-  console.log("QSELECT")
   const main = doc.querySelector('main');
   if (main) {
     console.log("START AWAITING")
     await loadHeader(doc.querySelector('header'));
     console.log("DONE AWAITING")
     decorateMain(main); // this does the STYLING for index doc
-    console.log("DECORATE MAIN")
     document.body.classList.add('appear');
-    console.log("DONE APPEAR")
     await waitForLCP(LCP_BLOCKS);
-    console.log("DONE LCP")
   }
 
   try {
@@ -137,9 +131,7 @@ function loadDelayed() {
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
-  console.log("DONE LOAD LAZY")
   loadDelayed();
-  console.log("DONE LOAD.")
 }
 
 loadPage();
