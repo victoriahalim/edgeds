@@ -625,15 +625,19 @@ async function loadBlock(block) {
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
     const { blockName } = block.dataset;
+    console.log(1)
     try {
       const cssLoaded = loadCSS(`${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`);
       const decorationComplete = new Promise((resolve) => {
         (async () => {
+          console.log(2)
           try {
             const mod = await import(
               `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
             );
+            console.log(3)
             if (mod.default) {
+              console.log(4)
               await mod.default(block);
             }
           } catch (error) {
@@ -648,6 +652,7 @@ async function loadBlock(block) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
     }
+    console.log(5)
     block.dataset.blockStatus = 'loaded';
   }
   return block;
