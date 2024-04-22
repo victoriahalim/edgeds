@@ -74,8 +74,11 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  console.log("START LOAD EAGER")
   document.documentElement.lang = 'en';
+  console.log("DECORATE")
   decorateTemplateAndTheme();
+  console.log("QSELECT")
   const main = doc.querySelector('main');
   if (main) {
     console.log("START AWAITING")
@@ -132,7 +135,6 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  console.log("START LOAD")
   await loadEager(document);
   await loadLazy(document);
   console.log("DONE LOAD LAZY")
