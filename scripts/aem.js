@@ -632,7 +632,6 @@ async function loadBlock(block) {
         (async () => {
           console.log(2);
           try {
-            console.log(2.5);
             const mod = await import(
               `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
             );
