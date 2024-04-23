@@ -637,7 +637,6 @@ async function loadBlock(block) {
             );
             console.log(3)
             if (mod.default) {
-              console.log(4)
               await mod.default(block);
             }
           } catch (error) {
@@ -652,7 +651,6 @@ async function loadBlock(block) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
     }
-    console.log(5)
     block.dataset.blockStatus = 'loaded';
   }
   return block;
@@ -704,11 +702,8 @@ function decorateBlocks(main) {
  * @returns {Promise}
  */
 async function loadHeader(header) {
-  console.log("BUILD")
   const headerBlock = buildBlock('header', '');
-  console.log("APPEND")
   header.append(headerBlock);
-  console.log("DECOR")
   decorateBlock(headerBlock);
   console.log("LOAD")
   return loadBlock(headerBlock);
