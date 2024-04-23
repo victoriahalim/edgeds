@@ -13,7 +13,7 @@ import {
   loadCSS,
 } from './aem.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ["carousel"]; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -79,7 +79,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     console.log("START AWAITING")
-    await loadHeader(doc.querySelector('header'));
+    loadHeader(doc.querySelector('header'));
     console.log("DONE AWAITING")
     decorateMain(main); // this does the STYLING for index doc
     document.body.classList.add('appear');
